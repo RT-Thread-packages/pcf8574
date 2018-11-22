@@ -9,7 +9,7 @@
  * 2018-11-22     flybreak     Make the first version of pcf8574's package
  */
 
-#include <finsh.h>
+#include <rtthread.h>
 #include "pcf8574.h"
 
 #define TEST_IO    0 //(0-7)
@@ -41,4 +41,6 @@ int pcf8574_sample(void)
 
     return 0;
 }
+#ifdef FINSH_USING_MSH
 MSH_CMD_EXPORT(pcf8574_sample, a pcf8574 sample);
+#endif
