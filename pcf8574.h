@@ -48,7 +48,7 @@ void pcf8574_deinit(struct pcf8574_device *dev);
  *
  * @param dev the pointer of device structure
  *
- * @return the state of data port.
+ * @return the state of data port. 0xFF meas all pin is high.
  */
 uint8_t pcf8574_port_read(pcf8574_device_t dev);
 
@@ -56,7 +56,7 @@ uint8_t pcf8574_port_read(pcf8574_device_t dev);
  * This function sets the status of the data port.
  *
  * @param dev the pointer of device structure
- * @param port_val the port value you want to set
+ * @param port_val the port value you want to set, 0xFF meas all pin output high.
  */
 void pcf8574_port_write(pcf8574_device_t dev, uint8_t port_val);
 
@@ -66,7 +66,7 @@ void pcf8574_port_write(pcf8574_device_t dev, uint8_t port_val);
  * @param dev the pointer of device structure
  * @param pin the specified pin of the data port
  *
- * @return the status of the specified data port pin.
+ * @return the status of the specified data port pin, 0 is low, 1 is high.
  */
 uint8_t pcf8574_pin_read(pcf8574_device_t dev, uint8_t pin);
 
@@ -74,7 +74,7 @@ uint8_t pcf8574_pin_read(pcf8574_device_t dev, uint8_t pin);
  * This function sets the status of the specified port pin.
  *
  * @param dev the pointer of device structure
- * @param pin_val the specified pin value you want to set
+ * @param pin_val the specified pin value you want to set, 0 is low, 1 is high.
  */
 void pcf8574_pin_write(pcf8574_device_t dev, uint8_t pin, uint8_t pin_val);
 
