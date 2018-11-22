@@ -55,8 +55,8 @@ pcf8574 软件包的使用流程一般如下：
 
 1. 初始化 pcf8574 设备 `pcf8574_init`
 2. 进行 IO 的操作
-   - 使用 API `pcf8574_read_byte/pcf8574_write_byte` 同时操作 8 路 IO
-   - 使用 API `pcf8574_read_bit/pcf8574_write_bit` 单独操作其中一 路 IO
+   - 使用 API `pcf8574_port_read/pcf8574_port_write` 同时操作 8 路 IO
+   - 使用 API `pcf8574_pin_read/pcf8574_pin_write` 单独操作其中一 路 IO
 
 详细的使用方法可以参考[pcf8574 示例程序](pcf8574_sample.c) 。
 
