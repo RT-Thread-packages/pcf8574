@@ -25,16 +25,16 @@ int pcf8574_sample(void)
     if (dev == RT_NULL)
         return -1;
 
-    pcf8574_write_bit(dev, TEST_IO, 0);
+    pcf8574_pin_write(dev, TEST_IO, 0);
 
-    value = pcf8574_read_bit(dev, TEST_IO);
+    value = pcf8574_pin_read(dev, TEST_IO);
     rt_kprintf("The value of pcf8574.P%d is %d\n", TEST_IO, value);
 
     rt_thread_mdelay(1000);
 
-    pcf8574_write_bit(dev, TEST_IO, 1);
+    pcf8574_pin_write(dev, TEST_IO, 1);
 
-    value = pcf8574_read_bit(dev, TEST_IO);
+    value = pcf8574_pin_read(dev, TEST_IO);
     rt_kprintf("The value of pcf8574.P%d is %d\n", TEST_IO, value);
 
     pcf8574_deinit(dev);

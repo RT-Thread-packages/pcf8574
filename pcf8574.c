@@ -6,7 +6,7 @@
  *
  * Change Logs:
  * Date           Author       Notes
- * 2018-11-21     SummerGift   change to new framework
+ * 2018-11-21     SummerGift   first version
  * 2018-11-22     flybreak     Make the first version of pcf8574's package
  */
 
@@ -18,7 +18,7 @@
 #define DBG_COLOR
 #include <rtdbg.h>
 
-uint8_t pcf8574_read_byte(pcf8574_device_t dev)
+uint8_t pcf8574_port_read(pcf8574_device_t dev)
 {
     uint8_t value;
 
@@ -27,15 +27,15 @@ uint8_t pcf8574_read_byte(pcf8574_device_t dev)
     return value;
 }
 
-void pcf8574_write_byte(pcf8574_device_t dev, uint8_t value)
+void pcf8574_port_write(pcf8574_device_t dev, uint8_t value)
 {
     rt_device_write(&dev->bus->parent, dev->i2c_addr, &value, 1);
 }
 
-uint8_t pcf8574_read_bit(pcf8574_device_t dev, uint8_t bit)
+uint8_t pcf8574_pin_read(pcf8574_device_t dev, uint8_t bit)
 {
     uint8_t data;
-    data = pcf8574_read_byte(dev);
+    data = pcf8574_port_read(dev);
 
     if (data & (1 << bit))
         return 1;
@@ -43,17 +43,17 @@ uint8_t pcf8574_read_bit(pcf8574_device_t dev, uint8_t bit)
         return 0;
 }
 
-void pcf8574_write_bit(pcf8574_device_t dev, uint8_t bit, uint8_t value)
+void pcf8574_pin_write(pcf8574_device_t dev, uint8_t bit, uint8_t value)
 {
     uint8_t data;
-    data = pcf8574_read_byte(dev);
+    data = pcf8574_port_read(dev);
 
     if (value == 0)
         data &= ~(1 << bit);
     else 
         data |= 1 << bit;
 
-    pcf8574_write_byte(dev, data);
+    pcf8574_port_write(dev, data);
 }
 
 pcf8574_device_t pcf8574_init(const char *dev_name, rt_uint8_t i2c_addr)

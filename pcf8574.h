@@ -6,7 +6,7 @@
  *
  * Change Logs:
  * Date           Author       Notes
- * 2018-11-21     SummerGift   change to new framework
+ * 2018-11-21     SummerGift   first version
  * 2018-11-22     flybreak     Make the first version of pcf8574's package
  */
 
@@ -32,55 +32,51 @@ typedef struct pcf8574_device *pcf8574_device_t;
  * @param dev_name the name of i2c bus device
  * @param i2c_addr the i2c device address for i2c communication,RT_NULL use default address
  *
- * @return the pointer of device driver structure, RT_NULL reprensents  initialization failed.
+ * @return the pointer of device structure, RT_NULL reprensents  initialization failed.
  */
 pcf8574_device_t pcf8574_init(const char *dev_name, rt_uint8_t i2c_addr);
 
 /**
  * This function releases memory
  *
- * @param dev the pointer of device driver structure
+ * @param dev the pointer of device structure
  */
 void pcf8574_deinit(struct pcf8574_device *dev);
 
 /**
- * This function read a byte data from the pcf8574.
+ * This function read the data port of pcf8574.
  *
- * @param dev the pointer of device driver structure
+ * @param dev the pointer of device structure
  *
- * @return the pointer of device driver structure, RT_NULL reprensents  initialization failed.
+ * @return the state of data port.
  */
-uint8_t pcf8574_read_byte(pcf8574_device_t dev);
+uint8_t pcf8574_port_read(pcf8574_device_t dev);
 
 /**
- * This function write a byte data from the pcf8574.
+ * This function sets the status of the data port.
  *
- * @param dev the pointer of device driver structure
- * @param param the i2c device address for i2c communication, RT_NULL for spi
- *
- * @return the pointer of device driver structure, RT_NULL reprensents  initialization failed.
+ * @param dev the pointer of device structure
+ * @param port_val the port value you want to set
  */
-void pcf8574_write_byte(pcf8574_device_t dev, uint8_t value);
+void pcf8574_port_write(pcf8574_device_t dev, uint8_t port_val);
 
 /**
- * This function read a bit data from the pcf8574.
+ * This function read the specified port pin of the pcf8574.
  *
- * @param dev the pointer of device driver structure
- * @param param the i2c device address for i2c communication, RT_NULL for spi
+ * @param dev the pointer of device structure
+ * @param pin the specified pin of the data port
  *
- * @return the pointer of device driver structure, RT_NULL reprensents  initialization failed.
+ * @return the status of the specified data port pin.
  */
-uint8_t pcf8574_read_bit(pcf8574_device_t dev, uint8_t bit);
+uint8_t pcf8574_pin_read(pcf8574_device_t dev, uint8_t pin);
 
 /**
- * This function write a bit data from the pcf8574.
+ * This function sets the status of the specified port pin.
  *
- * @param dev the pointer of device driver structure
- * @param param the i2c device address for i2c communication, RT_NULL for spi
- *
- * @return the pointer of device driver structure, RT_NULL reprensents  initialization failed.
+ * @param dev the pointer of device structure
+ * @param pin_val the specified pin value you want to set
  */
-void pcf8574_write_bit(pcf8574_device_t dev, uint8_t bit, uint8_t value);
+void pcf8574_pin_write(pcf8574_device_t dev, uint8_t pin, uint8_t pin_val);
 
 #endif
 
