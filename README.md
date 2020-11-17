@@ -1,82 +1,84 @@
-# pcf8574 软件包
+# pcf8574 package
 
-## 介绍
+[中文页](README_ZH.md) | English
 
-`pcf8574` 软件包是 RT-Thread 针对 I2C 并行口扩展电路 PCF8574T 推出的一个软件包，兼容 PCF8574A。使用这个软件包，可以在 RT-Thread 上非常方便的使用该器件，并且支持一个 I2C 总线上挂载多个 PCF8574T。
+## Introduction
 
-本文主要介绍该软件包的使用方式、API，以及 `MSH` 测试命令。
+The `pcf8574` software package is a software package developed by RT-Thread for the I2C parallel port expansion circuit PCF8574T, compatible with PCF8574A. Using this software package, you can use the device on RT-Thread very conveniently, and support multiple PCF8574Ts mounted on an I2C bus.
 
-### 目录结构
+This article mainly introduces the use of the package, API, and `MSH` test commands.
+
+### Directory Structure
 
 ```
 pcf8574
-│   README.md                       // 软件包说明
-│   pcf8574.c                       // 源文件
-│   pcf8574.h                       // 头文件
-│   pcf8574_sample.c                // 软件包使用示例代码
-│   SConscript                      // RT-Thread 默认的构建脚本
-│   LICENSE                         // 许可证文件
+│ README.md // package description
+│ pcf8574.c // source file
+│ pcf8574.h // header file
+│ pcf8574_sample.c // Sample code for software package
+│ SConscript // RT-Thread default build script
+│ LICENSE // License file
 ```
 
-### 许可证
+### License
 
-pcf8574 遵循 Apache-2.0 许可，详见 `LICENSE` 文件。
+pcf8574 complies with the Apache-2.0 license, see the `LICENSE` file for details.
 
-### 依赖
+### Dependence
 
 - RT_Thread 3.0+
-- i2c 设备驱动
+- i2c device driver
 
-## 获取方式
+## method of obtaining
 
-使用 `pcf8574 package` 需要在 RT-Thread 的包管理中选中它，具体路径如下：
+To use `pcf8574 package`, you need to select it in the package management of RT-Thread. The specific path is as follows:
 
 ```
 RT-Thread online packages
-    peripheral libraries and drivers  --->
-        pcf8574: Remote 8-bit I/O expander for I2C-bus  --->
+    peripheral libraries and drivers --->
+        pcf8574: Remote 8-bit I/O expander for I2C-bus --->
 ```
 
-进入 pcf8574 软件包的配置菜单按自己的需求进行具体的配置
+Enter the configuration menu of the pcf8574 software package for specific configuration according to your needs
 
 ```
-    --- pcf8574: Remote 8-bit I/O expander for I2C-bus                           
-        [*]   Enable pcf8574 sample
-           Version (latest)  --->
+    --- pcf8574: Remote 8-bit I/O expander for I2C-bus
+        [*] Enable pcf8574 sample
+           Version (latest) --->
 ```
 
-**Enable pcf8574 sample** ：开启 pcf8574  使用示例
+**Enable pcf8574 sample**: Enable pcf8574 sample
 
-配置完成后让 RT-Thread 的包管理器自动更新，或者使用 pkgs --update 命令更新包到 BSP 中。
+After the configuration is complete, let the RT-Thread package manager automatically update, or use the pkgs --update command to update the package to the BSP.
 
-## 使用方法
+## Instructions
 
-pcf8574 软件包的使用流程一般如下：
+The use process of pcf8574 software package is generally as follows:
 
-1. 初始化 pcf8574 设备 `pcf8574_init`
-2. 进行 IO 的操作
-   - 使用 API `pcf8574_port_read/pcf8574_port_write` 同时操作 8 路 IO
-   - 使用 API `pcf8574_pin_read/pcf8574_pin_write` 单独操作其中一 路 IO
+1. Initialize pcf8574 device `pcf8574_init`
+2. Perform IO operations
+   - Use API `pcf8574_port_read/pcf8574_port_write` to operate 8 channels of IO at the same time
+   - Use API `pcf8574_pin_read/pcf8574_pin_write` to operate one of the IOs separately
 
-详细的使用方法可以参考[pcf8574 示例程序](pcf8574_sample.c) 。
+For detailed usage, please refer to [pcf8574 sample program](pcf8574_sample.c).
 
-## MSH 测试命令
+## MSH Test Command
 
-如果开启了 pcf8574 软件包的示例程序，就会导出 `pcf8574_sample` 命令到控制台。调用之后默认会在 `i2c1`总线上探测地址为 `0x20` 的 PCF8574 设备，并会操作扩展端口的第 0 口进行测试。运行结果如下：
+If the sample program of the pcf8574 software package is enabled, the command `pcf8574_sample` will be exported to the console. After the call, it will detect the PCF8574 device with the address of `0x20` on the `i2c1` bus by default, and will operate the port 0 of the expansion port for testing. The results are as follows:
 
 ```
 msh >pcf8574_sample
 [D/pcf8574] pcf8574 init done
 The value of pcf8574.P0 is 0
 The value of pcf8574.P0 is 1
-msh >
+msh>
 ```
 
-## 注意事项
+## Precautions
 
-暂无。
+Nothing.
 
-## 联系方式
+## Contact information
 
-- 维护：[guozhanxin](https://github.com/Guozhanxin)
-- 主页：<https://github.com/RT-Thread-packages/pcf8574 >
+- Maintenance: [guozhanxin](https://github.com/Guozhanxin)
+- Homepage: <https://github.com/RT-Thread-packages/pcf8574>
