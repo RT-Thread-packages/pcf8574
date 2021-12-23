@@ -18,23 +18,23 @@
 #define DBG_COLOR
 #include <rtdbg.h>
 
-uint8_t pcf8574_port_read(pcf8574_device_t dev)
+rt_uint8_t pcf8574_port_read(pcf8574_device_t dev)
 {
-    uint8_t value;
+    rt_uint8_t value;
 
     rt_device_read(&dev->bus->parent, dev->i2c_addr, &value, 1);
 
     return value;
 }
 
-void pcf8574_port_write(pcf8574_device_t dev, uint8_t value)
+void pcf8574_port_write(pcf8574_device_t dev, rt_uint8_t value)
 {
     rt_device_write(&dev->bus->parent, dev->i2c_addr, &value, 1);
 }
 
-uint8_t pcf8574_pin_read(pcf8574_device_t dev, uint8_t bit)
+rt_uint8_t pcf8574_pin_read(pcf8574_device_t dev, rt_uint8_t bit)
 {
-    uint8_t data;
+    rt_uint8_t data;
     data = pcf8574_port_read(dev);
 
     if (data & (1 << bit))
@@ -43,9 +43,9 @@ uint8_t pcf8574_pin_read(pcf8574_device_t dev, uint8_t bit)
         return 0;
 }
 
-void pcf8574_pin_write(pcf8574_device_t dev, uint8_t bit, uint8_t value)
+void pcf8574_pin_write(pcf8574_device_t dev, rt_uint8_t bit, rt_uint8_t value)
 {
-    uint8_t data;
+    rt_uint8_t data;
     data = pcf8574_port_read(dev);
 
     if (value == 0)
@@ -58,7 +58,7 @@ void pcf8574_pin_write(pcf8574_device_t dev, uint8_t bit, uint8_t value)
 
 pcf8574_device_t pcf8574_init(const char *dev_name, rt_uint8_t i2c_addr)
 {
-    uint8_t buffer[] = { 0xFF };
+    rt_uint8_t buffer[] = { 0xFF };
     pcf8574_device_t dev = RT_NULL;
     
     RT_ASSERT(dev_name);
